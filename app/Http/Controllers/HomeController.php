@@ -34,6 +34,9 @@ class HomeController extends Controller
         $jshir = $request->jshir;
         $list = Talaba::all();
         $list = Talaba::query();
+
+
+
         $list = $list->get();
         // return view('maruza.table', compact('list'));
         return 1;
