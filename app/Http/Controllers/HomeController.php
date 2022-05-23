@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Talaba;
+use App\Models\Admin;
 
 
 class HomeController extends Controller
@@ -28,6 +28,10 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function open_check()
+    {
+        return view('User.Login_talaba');
+    }
     public function check(Request $request)
     {
         $rules = ['captcha' => 'required|captcha'];
@@ -36,16 +40,32 @@ class HomeController extends Controller
             return back()->with("captchax", "Xato");
         }
         $passport = $request->passport;
-        $list = Talaba::all();
-        $list = Talaba::query();
+        $list = Admin::all();
+        $list = Admin::query();
         if ($passport != null) {
             $list = $list->where('Passport_seriya', $passport);
         }
         $list = $list->get();
         return view('User.User', compact('list'));
     }
-    public function check1()
+
+    public function admin()
     {
-        return view('User.User');
+        return view('Admin.Login_Admin');
+    }
+    public function open_admin(Request $request)
+    {
+        $login  = $request->login;
+        $parol = $request->password;
+        $list = Admin::all();
+        $list = Admin::query();
+        if ($login != null) {
+            $list = $list->where('login', $login);
+            if ($parol != null) {
+                $list = $list->where('parol', $parol);
+            }
+        }
+        $list = $list->get();
+        return view('Admin.dashboard', compact('list'));
     }
 }

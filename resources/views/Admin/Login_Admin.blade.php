@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/login.css">
-    <title>Login talaba</title>
+    <title>Login Admin</title>
 </head>
 
 <body>
@@ -25,17 +25,16 @@
             </div>
 
             <!-- Login Form -->
-            <form method="post" action="{{route('check')}}">
+            <form method="post" action="{{route('admin')}}">
                 @csrf
-                <input type="text" id="login" class="fadeIn second" name="passport" placeholder="Passport seriya raqami">
-                {!!Captcha::img();!!}
-                <input type="text" id="password" class="fadeIn third" name="captcha" placeholder="Captcha"><br>
-                @if (session()->has('captchax'))
-                <div class="alert alert-danger">{{ session()->get('captchax') }}</div>
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Parol"><br>
+                @if (session()->has('message'))
+                <strong class="alert alert-danger">{{ session()->get('message') }}</strong>
                 @endif
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <br><input type="submit" class="fadeIn fourth" value="Log In">
             </form>
-            <a class="m-2" href="{{url('login_Admin')}}">Admin sifatida kirish</a>
+            <a class="m-2" href="{{url('login_open')}}">Talaba sifatida kirish</a>
         </div>
     </div>
 </body>
