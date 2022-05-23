@@ -24,9 +24,8 @@ Route::get('/', function () {
 });
 
 Route::post('/login_user', [HomeController::class, 'check'])->name('check');
-
 Auth::routes();
-
+Route::get('/login', [HomeController::class, 'check1']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('yonalish', YonalishController::class);

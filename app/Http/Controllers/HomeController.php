@@ -30,15 +30,22 @@ class HomeController extends Controller
 
     public function check(Request $request)
     {
+        $rules = ['captcha' => 'required|captcha'];
+        $validator = validator()->make(request()->all(), $rules);
+        if ($validator->fails()) {
+            return back()->with("captchax", "Xato");
+        }
         $passport = $request->passport;
-        $jshir = $request->jshir;
         $list = Talaba::all();
         $list = Talaba::query();
-
-
-
+        if ($passport != null) {
+            $list = $list->where('Passport_seriya', $passport);
+        }
         $list = $list->get();
-        // return view('maruza.table', compact('list'));
-        return 1;
+        return view('User.User', compact('list'));
+    }
+    public function check1()
+    {
+        return view('User.User');
     }
 }

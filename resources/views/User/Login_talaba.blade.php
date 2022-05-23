@@ -27,16 +27,14 @@
             <!-- Login Form -->
             <form method="post" action="{{route('check')}}">
                 @csrf
-                <input type="text" id="login" class="fadeIn second" name="passport" placeholder="login">
-                <input type="text" id="password" class="fadeIn third" name="jshir" placeholder="password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+                <input type="text" id="login" class="fadeIn second" name="passport" placeholder="Passport seriya raqami">
+                {!!Captcha::img();!!}
+                <input type="text" id="password" class="fadeIn third" name="captcha" placeholder="Captcha"><br>
+                @if (session()->has('captchax'))
+                <strong>{{ session()->get('captchax') }}</strong>
+                @endif
+                <br><input type="submit" class="fadeIn fourth" value="Log In">
             </form>
-
-            <!-- Remind Passowrd -->
-            <div id="formFooter">
-                <a class="underlineHover" href="#">Forgot Password?</a>
-            </div>
-
         </div>
     </div>
 </body>
