@@ -19,14 +19,22 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {
+Route::get('talaba', function () {
     return view('User.Login_Talaba');
 });
 
+Route::get('admin', function () {
+    return view('Admin.Login_Admin');
+});
+
+Route::get('user', function () {
+    return view('User.User');
+});
+
+//Route::get('/login_user', [HomeController::class, 'check1']);
 Route::post('/login_user', [HomeController::class, 'check'])->name('check');
-Route::get('/login_open', [HomeController::class, 'open_check']);
-Route::get('/login_Admin', [HomeController::class, 'admin']);
-Route::post('/open_Admin', [HomeController::class, 'open_admin'])->name('admin');
+Route::get('/yonalishlar', [HomeController::class, 'yonalish'])->name('yonalishTest');
+Route::post('/login_Admin', [HomeController::class, 'open_admin'])->name('admin');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 

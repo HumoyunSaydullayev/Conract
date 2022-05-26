@@ -31,11 +31,10 @@
                 {!!Captcha::img();!!}
                 <input type="text" id="password" class="fadeIn third" name="captcha" placeholder="Captcha"><br>
                 @if (session()->has('captchax'))
-                <div class="alert alert-danger">{{ session()->get('captchax') }}</div>
+                <div class="alert alert-danger mr-5 ml-5">{{ session()->get('captchax') }}</div>
                 @endif
                 <input type="submit" class="fadeIn fourth" value="Log In">
             </form>
-            <a class="m-2" href="{{url('login_Admin')}}">Admin sifatida kirish</a>
         </div>
     </div>
 </body>

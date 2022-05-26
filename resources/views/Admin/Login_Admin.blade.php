@@ -28,13 +28,12 @@
             <form method="post" action="{{route('admin')}}">
                 @csrf
                 <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login">
-                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Parol"><br>
+                <input type="text" id="password" class="fadeIn third" name="password" placeholder="Parol"><br>
                 @if (session()->has('message'))
                 <strong class="alert alert-danger">{{ session()->get('message') }}</strong>
                 @endif
                 <br><input type="submit" class="fadeIn fourth" value="Log In">
             </form>
-            <a class="m-2" href="{{url('login_open')}}">Talaba sifatida kirish</a>
         </div>
     </div>
 </body>

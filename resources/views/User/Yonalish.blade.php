@@ -23,44 +23,19 @@
 </nav>
 
 <body class="d-flex flex-column min-vh-100">
-    @foreach($list as $t)
-    <h1 class="m-3"><b>{{$t->Ism}} {{$t->Familya}} {{$t->Sharifi}}</b></h1>
-    @endforeach
-
-    <p>TOSHKENT SHAHRI YEOJU TEXNIKA INSTITUTI</p>
-    <div class="container d-flex justify-content-center">
-
-        <table class="table  table-bordered table-striped table-hover ">
-            <tbody>
-                @foreach($list as $t)
-                <tr class="">
-                    <td><b>Fakultet</b></td>
-                    <td>({{$t->yonalish->Short_name}})-{{$t->yonalish->Nomi}} </td>
-                </tr>
-                <tr>
-                    <td><b>Kurs</b></td>
-                    <td>{{$t->Yonalishi_id}}</td>
-                </tr>
-                <tr>
-                    <td><b>Pasport seriya</b></td>
-                    <td>{{$t->Passport_seriya}}</td>
-                </tr>
-                <tr>
-                    <td><b>O'qish turi</b></td>
-                    <td>{{$t->yonalish->Talim_shakli}}</td>
-                </tr>
-                <tr>
-                    <td><b>To'lov miqdori</b></td>
-                    <td>{{$t->yonalish->contract->Summa}}</td>
-                </tr>
-                <tr>
-                    <td><b>O'quv yili</b></td>
-                    <td>{{$t->yonalish->contract->Oquv_yili}}</td>
-                </tr>
+    <table class="table table-bordered">
+        @foreach($list as $y)
+        <tr>
+            <td><b>{{$y->Nomi}}</b></td>
+            <td>
+                @foreach($y->talabalar as $t)
+                <li>{{$t->Familya}} {{$t->Ism}} </li>
                 @endforeach
-            </tbody>
-        </table>
-    </div>
+            </td>
+        </tr>
+        @endforeach
+    </table>
+
 </body>
 
 <footer class=" mt-auto bg-dark text-center text-white footer">

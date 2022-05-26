@@ -9,4 +9,9 @@ class Talaba extends Model
 {
     use HasFactory;
     protected $table = 'Talaba';
+
+    public function yonalish()
+    {
+        return $this->belongsTo(Yonalish::class, 'Yonalishi_id', 'id');
+    }
 }
