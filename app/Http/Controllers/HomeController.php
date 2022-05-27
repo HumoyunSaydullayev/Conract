@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Talaba;
 use App\Models\Yonalish;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeController extends Controller
 {
@@ -28,38 +29,56 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function chiqish(Request $request)
+    {
+        if ($request->session()->has('key')) {
+            $passport = $request->session()->pull('key', 'default');
+        }
+        return redirect()->route('boshsahifa');
+    }
 
 
     public function check(Request $request)
     {
-        $rules = ['captcha' => 'required|captcha'];
-        $validator = validator()->make(request()->all(), $rules);
-        if ($validator->fails()) {
-            return back()->with("captchax", "Xato");
+        if ($request->session()->has('key')) {
+            $passport = $request->session()->get('key');
+        } else {
+            if (!$request->has('passport'))
+                return redirect()->route('boshsahifa');
+
+            $rules = ['captcha' => 'required|captcha'];
+            $validator = validator()->make(request()->all(), $rules);
+            if ($validator->fails()) {
+                return back()->with("captchax", "Xato");
+            }
+            $passport = $request->passport;
+            $request->session()->put('key', $passport);
         }
-        $passport = $request->passport;
-        $list = Talaba::with('yonalish.contract');
+        $t = Talaba::with(['yonalish.contract', 'shartnoma'])->get();
+        #return $t;
 
         if ($passport != null) {
-            $list = $list->where('Passport_seriya', $passport);
+            $t = $t->where('Passport_seriya', $passport);
         }
-        $list = $list->get();
-        return view('User.User', compact('list'));
+        $t = $t->first();
+        return view('User.User', compact('t'));
     }
 
-    public function check1()
+
+    public function getPdf(Request $request)
     {
-        return view('User.User');
-    }
-    public function yonalish(Request $request)
-    {
-        $list = Talaba::with('yonalish.contract')->get();
-        return $list;
+        $passport = $request->passport;
+        // dd($passport);
+        $t = Talaba::with('yonalish.contract');
 
-        $list = Yonalish::with("Contract")->get();
-        return view('User.Yonalish', compact('list'));
+        if ($passport != null) {
+            $t = $t->where('Passport_seriya', $passport);
+        }
+        $t = $t->first();
+        $pdf = PDF::loadView('mypdf', compact('t'));
+        // return view('mypdf', compact('list'));
+        return $pdf->download('Shartnoma.pdf');
     }
-
 
     public function open_admin(Request $request)
     {

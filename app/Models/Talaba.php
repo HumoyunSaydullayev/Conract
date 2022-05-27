@@ -14,4 +14,9 @@ class Talaba extends Model
     {
         return $this->belongsTo(Yonalish::class, 'Yonalishi_id', 'id');
     }
+
+    public function shartnoma()
+    {
+        return $this->hasMany(Shartnoma::class, 'Talaba_id', 'id');
+    }
 }

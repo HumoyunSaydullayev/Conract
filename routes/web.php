@@ -19,23 +19,20 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::get('talaba', function () {
+Route::get('/', function () {
     return view('User.Login_Talaba');
-});
+})->name('boshsahifa');
+
+Route::get('/chiqish', [HomeController::class, "chiqish"])->name('chiqish');
+
+Route::get('/login_user', [HomeController::class, 'check'])->name('check');
+
+Route::get('pdf', [HomeController::class, 'getPdf'])->name('pdf');
 
 Route::get('admin', function () {
     return view('Admin.Login_Admin');
 });
 
-Route::get('user', function () {
-    return view('User.User');
-});
-
-//Route::get('/login_user', [HomeController::class, 'check1']);
-Route::post('/login_user', [HomeController::class, 'check'])->name('check');
-Route::get('/yonalishlar', [HomeController::class, 'yonalish'])->name('yonalishTest');
 Route::post('/login_Admin', [HomeController::class, 'open_admin'])->name('admin');
-Auth::routes();
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('yonalish', YonalishController::class);
+Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -9,30 +9,28 @@
     <!-- <link rel="stylesheet" href="/css/Use.css"> -->
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
-    <title>Document</title>
+    <title>Contract</title>
 </head>
 <nav class="navbar navbar-light bg-primary rect">
     <div class="container-fluid">
         <h3><b>TOSHKENT SHAHRI YEOJU TEXNIKA INSTITUTI</b></h3>
+
         <button type="submit" class="btn btn-light m-4">
             <font style="vertical-align: inherit;">
-                <font style="vertical-align: inherit;">Tizimdan chiqish</font>
+                <font style="vertical-align: inherit; "><a style="text-decoration:none" href="{{ route('chiqish')}}">Tizimdan chiqish</a> </font>
             </font>
         </button>
     </div>
 </nav>
 
 <body class="d-flex flex-column min-vh-100">
-    @foreach($list as $t)
     <h1 class="m-3"><b>{{$t->Ism}} {{$t->Familya}} {{$t->Sharifi}}</b></h1>
-    @endforeach
 
     <p>TOSHKENT SHAHRI YEOJU TEXNIKA INSTITUTI</p>
     <div class="container d-flex justify-content-center">
 
-        <table class="table  table-bordered table-striped table-hover ">
+        <table class="table table-bordered table-striped table-hover justify-content-center">
             <tbody>
-                @foreach($list as $t)
                 <tr class="">
                     <td><b>Fakultet</b></td>
                     <td>({{$t->yonalish->Short_name}})-{{$t->yonalish->Nomi}} </td>
@@ -50,6 +48,10 @@
                     <td>{{$t->yonalish->Talim_shakli}}</td>
                 </tr>
                 <tr>
+                    <td><b>Shartnoma raqami</b></td>
+                    <td>{{$t->shartnoma[0]->id}}</td>
+                </tr>
+                <tr>
                     <td><b>To'lov miqdori</b></td>
                     <td>{{$t->yonalish->contract->Summa}}</td>
                 </tr>
@@ -57,10 +59,18 @@
                     <td><b>O'quv yili</b></td>
                     <td>{{$t->yonalish->contract->Oquv_yili}}</td>
                 </tr>
-                @endforeach
             </tbody>
         </table>
+
     </div>
+    <div class="mx-5 my-4 d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary mx-5 my-2 d-flex justify-content-center">
+            <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit; "><a style="color:#fff;text-decoration:none;" href="{{ route('pdf', ['passport'=>$t->Passport_seriya])}}">Shartnomani yuklab ollish</a> </font>
+            </font>
+        </button>
+    </div>
+
 </body>
 
 <footer class=" mt-auto bg-dark text-center text-white footer">

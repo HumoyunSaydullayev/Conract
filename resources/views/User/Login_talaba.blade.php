@@ -25,7 +25,7 @@
             </div>
 
             <!-- Login Form -->
-            <form method="post" action="{{route('check')}}">
+            <form method="get" action="{{route('check')}}">
                 @csrf
                 <input type="text" id="login" class="fadeIn second" name="passport" placeholder="Passport seriya raqami">
                 {!!Captcha::img();!!}
